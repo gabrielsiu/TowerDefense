@@ -17,9 +17,12 @@ class Tower: UIView {
     
     var fireRate: CGFloat = 1
     var fireTimer: Timer?
+    let range: CGFloat
     
-    init(_ x: CGFloat, _ y: CGFloat) {
-        super.init(frame: CGRect(x: x, y: y, width: 50, height: 50))
+    init(point: CGPoint, range: CGFloat) {
+        self.range = range
+        super.init(frame: CGRect(x: point.x, y: point.y,
+                                 width: k.Sizes.towerSideLength, height: k.Sizes.towerSideLength))
         backgroundColor = .brown
         setupTimer()
     }
@@ -34,20 +37,20 @@ class Tower: UIView {
     
     @objc func fire() {
         guard let enemyPosition = EnemyPositionService.instance.firstEnemy() else { return }
-//        print(frame)
-//        print(enemyPosition)
         
         let xDiff = enemyPosition.x - frame.midX
         let yDiff = enemyPosition.y - frame.midY
         
         let hyp = sqrt(pow(xDiff, 2) + pow(yDiff, 2))
         
+        guard hyp < range else { return }
+        
         let xStep = 3 * xDiff / hyp
         let yStep = 3 * yDiff / hyp
         
         let info = ProjectileInfo(xStep: xStep, yStep: yStep, origin: CGPoint(x: frame.midX, y: frame.midY))
         
-        NotificationCenter.default.post(name: Notification.Name("projectileFired"), object: info)
+        NotificationCenter.default.post(name: Notification.Name(k.Notification.projectileFired), object: info)
     }
     
 }

@@ -9,20 +9,22 @@
 /* Begin PBXBuildFile section */
 		DAE5EB0E28821E0C00EE443F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE5EB0D28821E0C00EE443F /* AppDelegate.swift */; };
 		DAE5EB1028821E0C00EE443F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE5EB0F28821E0C00EE443F /* SceneDelegate.swift */; };
-		DAE5EB1228821E0C00EE443F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE5EB1128821E0C00EE443F /* ViewController.swift */; };
 		DAE5EB1728821E0E00EE443F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DAE5EB1628821E0E00EE443F /* Assets.xcassets */; };
 		DAE5EB1A28821E0E00EE443F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DAE5EB1828821E0E00EE443F /* LaunchScreen.storyboard */; };
 		DAE5EB2228821EF100EE443F /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE5EB2128821EF100EE443F /* Enemy.swift */; };
 		DAE5EB24288224B700EE443F /* Tower.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE5EB23288224B700EE443F /* Tower.swift */; };
 		DAE5EB2628822A7100EE443F /* Projectile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE5EB2528822A7100EE443F /* Projectile.swift */; };
 		DAE5EB282883BC2900EE443F /* EnemyPositionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE5EB272883BC2900EE443F /* EnemyPositionService.swift */; };
+		DAE5EB2F2884C3D400EE443F /* TrackVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE5EB2E2884C3D400EE443F /* TrackVC.swift */; };
+		DAE5EB312884C40200EE443F /* TrackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE5EB302884C40200EE443F /* TrackViewModel.swift */; };
+		DAE5EB342884C86C00EE443F /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE5EB332884C86C00EE443F /* UIView+Constraints.swift */; };
+		DAE5EB372884C9B300EE443F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE5EB362884C9B300EE443F /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DAE5EB0A28821E0C00EE443F /* TowerDefense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TowerDefense.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAE5EB0D28821E0C00EE443F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DAE5EB0F28821E0C00EE443F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DAE5EB1128821E0C00EE443F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DAE5EB1628821E0E00EE443F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DAE5EB1928821E0E00EE443F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DAE5EB1B28821E0E00EE443F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -30,6 +32,10 @@
 		DAE5EB23288224B700EE443F /* Tower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tower.swift; sourceTree = "<group>"; };
 		DAE5EB2528822A7100EE443F /* Projectile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Projectile.swift; sourceTree = "<group>"; };
 		DAE5EB272883BC2900EE443F /* EnemyPositionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyPositionService.swift; sourceTree = "<group>"; };
+		DAE5EB2E2884C3D400EE443F /* TrackVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackVC.swift; sourceTree = "<group>"; };
+		DAE5EB302884C40200EE443F /* TrackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackViewModel.swift; sourceTree = "<group>"; };
+		DAE5EB332884C86C00EE443F /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
+		DAE5EB362884C9B300EE443F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,18 +68,69 @@
 		DAE5EB0C28821E0C00EE443F /* TowerDefense */ = {
 			isa = PBXGroup;
 			children = (
-				DAE5EB2128821EF100EE443F /* Enemy.swift */,
-				DAE5EB23288224B700EE443F /* Tower.swift */,
-				DAE5EB2528822A7100EE443F /* Projectile.swift */,
+				DAE5EB2B2884C35E00EE443F /* Model */,
+				DAE5EB2C2884C36600EE443F /* View */,
+				DAE5EB2D2884C36B00EE443F /* ViewModel */,
+				DAE5EB382884CAAA00EE443F /* Services */,
+				DAE5EB322884C83D00EE443F /* Extensions */,
+				DAE5EB352884C99E00EE443F /* Utilities */,
 				DAE5EB0D28821E0C00EE443F /* AppDelegate.swift */,
 				DAE5EB0F28821E0C00EE443F /* SceneDelegate.swift */,
-				DAE5EB1128821E0C00EE443F /* ViewController.swift */,
 				DAE5EB1628821E0E00EE443F /* Assets.xcassets */,
 				DAE5EB1828821E0E00EE443F /* LaunchScreen.storyboard */,
 				DAE5EB1B28821E0E00EE443F /* Info.plist */,
-				DAE5EB272883BC2900EE443F /* EnemyPositionService.swift */,
 			);
 			path = TowerDefense;
+			sourceTree = "<group>";
+		};
+		DAE5EB2B2884C35E00EE443F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DAE5EB2128821EF100EE443F /* Enemy.swift */,
+				DAE5EB23288224B700EE443F /* Tower.swift */,
+				DAE5EB2528822A7100EE443F /* Projectile.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DAE5EB2C2884C36600EE443F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DAE5EB2E2884C3D400EE443F /* TrackVC.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		DAE5EB2D2884C36B00EE443F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DAE5EB302884C40200EE443F /* TrackViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DAE5EB322884C83D00EE443F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DAE5EB332884C86C00EE443F /* UIView+Constraints.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DAE5EB352884C99E00EE443F /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				DAE5EB362884C9B300EE443F /* Constants.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		DAE5EB382884CAAA00EE443F /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				DAE5EB272883BC2900EE443F /* EnemyPositionService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,12 +203,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAE5EB312884C40200EE443F /* TrackViewModel.swift in Sources */,
 				DAE5EB2628822A7100EE443F /* Projectile.swift in Sources */,
 				DAE5EB2228821EF100EE443F /* Enemy.swift in Sources */,
-				DAE5EB1228821E0C00EE443F /* ViewController.swift in Sources */,
+				DAE5EB342884C86C00EE443F /* UIView+Constraints.swift in Sources */,
 				DAE5EB24288224B700EE443F /* Tower.swift in Sources */,
+				DAE5EB372884C9B300EE443F /* Constants.swift in Sources */,
 				DAE5EB282883BC2900EE443F /* EnemyPositionService.swift in Sources */,
 				DAE5EB0E28821E0C00EE443F /* AppDelegate.swift in Sources */,
+				DAE5EB2F2884C3D400EE443F /* TrackVC.swift in Sources */,
 				DAE5EB1028821E0C00EE443F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

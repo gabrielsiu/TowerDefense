@@ -124,5 +124,6 @@ class Enemy: UIView {
     func invalidate() {
         isValid = false
         hitpoints = 0
+        backgroundColor = color
     }
 }

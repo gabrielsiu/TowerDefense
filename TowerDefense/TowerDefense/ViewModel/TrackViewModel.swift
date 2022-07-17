@@ -1,13 +1,13 @@
 //
-//  ViewController.swift
+//  TrackViewModel.swift
 //  TowerDefense
 //
-//  Created by Gabriel Siu on 2022-07-15.
+//  Created by Gabriel Siu on 2022-07-17.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+final class TrackViewModel {
     
     var enemies = [Enemy]()
     var towers = [Tower]()
@@ -16,32 +16,23 @@ class ViewController: UIViewController {
     var obstacleTiles = [UIView]()
     
     var testTimer: Timer?
-    
     var enemyMoveTimer: Timer?
     var enemyPositionTimer: Timer?
     
-    // Grid
     let numTilesHorizontal = 8
     var tileLength: CGFloat {
         UIScreen.main.bounds.width / CGFloat(numTilesHorizontal)
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .purple
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(fireProjectile(_:)),
-                                               name: Notification.Name("projectileFired"), object: nil)
+    
+    // MARK: Initialization
+    
+    init() {
         setupTimers()
-        
-        setupGrid()
-        setupEnemyButton()
-        setupTowerTap()
     }
     
     // MARK: Setup
     
-    func setupGrid() {
+    func setupGrid() -> [UIView] {
         let grid = [[1, 1, 1, 1, 1, 1, 1, 1],
                     [1, 1, 1, 1, 1, 1, 1, 1],
                     [1, 1, 1, 1, 1, 1, 1, 1],
@@ -67,11 +58,12 @@ class ViewController: UIViewController {
                                                 width: tileLength, height: tileLength))
                 tile.backgroundColor = .gray
                 if grid[i][j] == 1 {
-                    view.addSubview(tile)
                     obstacleTiles.append(tile)
                 }
             }
         }
+        
+        return obstacleTiles
     }
     
     func setupTimers() {
@@ -81,29 +73,31 @@ class ViewController: UIViewController {
         enemyPositionTimer = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(updatePositions), userInfo: nil, repeats: true)
     }
     
-    func setupEnemyButton() {
-        let button = UIButton()
-        button.addTarget(self, action: #selector(addEnemy), for: .touchUpInside)
-        button.setTitle("Rickyy", for: .normal)
-        view.addSubview(button)
-        button.setAxisConstraints(xAnchor: view.centerXAnchor, yAnchor: view.centerYAnchor)
+    // MARK: Public Methods
+    
+    func addEnemy(hitpoints: Int, startIndex: CGPoint) -> Enemy {
+        let enemy = Enemy(hitpoints: hitpoints, length: tileLength, startPoint: startIndex,
+                          initialDirection: .right) // TODO
+        enemies.append(enemy)
+        return enemy
     }
     
-    func setupTowerTap() {
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(addTower(tap:))))
+    func addTower(_ point: CGPoint) -> Tower {
+        let dropPoint = CGPoint(x: point.x - (k.Sizes.towerSideLength / 2), y: point.y - (k.Sizes.towerSideLength / 2))
+        let tower = Tower(point: dropPoint, range: 200)
+        towers.append(tower)
+        return tower
+    }
+    
+    func addProjectile(_ info: ProjectileInfo) -> Projectile {
+        let projectile = Projectile(info.origin.x, info.origin.y, info.xStep, info.yStep)
+        projectiles.append(projectile)
+        return projectile
     }
     
     // MARK: Actions
     
-    @objc func alsdjf() {
-//        let positions = enemies.map { $0.center }
-//        print(positions)
-//        print(projectiles.map { $0.superview!.bounds.contains($0.frame) })
-//        print(projectiles)
-        print(enemies.map { $0.color })
-    }
-    
-    @objc func moveEnemies() {
+    @objc private func moveEnemies() {
         projectiles.forEach { $0.move() }
         enemies.forEach { enemy in
             
@@ -173,75 +167,16 @@ class ViewController: UIViewController {
         enemies = enemies.enumerated().filter({ !removedEnemies.contains($0.offset) }).map { $0.element }
     }
     
-    @objc func updatePositions() {
+    @objc private func updatePositions() {
         enemies = enemies.filter { $0.center.x < 450 }
         EnemyPositionService.instance.updatePositions(enemies.map { $0.center })
     }
     
-    @objc func addEnemy() {
-        let enemy = Enemy(hitpoints: 3, length: tileLength, startPoint: CGPoint(x: 0, y: 4), initialDirection: .right)
-        view.addSubview(enemy)
-        enemies.append(enemy)
-    }
-    
-    @objc func addTower(tap: UITapGestureRecognizer) {
-        let point = tap.location(in: view)
-        let tower = Tower(point.x - 25, point.y - 25)
-        view.addSubview(tower)
-        towers.append(tower)
-    }
-    
-    @objc func fireProjectile(_ notification: Notification) {
-        if let info = notification.object as? ProjectileInfo {
-            let projectile = Projectile(info.origin.x, info.origin.y, info.xStep, info.yStep)
-            view.addSubview(projectile)
-            projectiles.append(projectile)
-        }
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-extension UIView {
-    
-    func setEdgeConstraints(top: NSLayoutYAxisAnchor? = nil, bottom: NSLayoutYAxisAnchor? = nil, leading: NSLayoutXAxisAnchor? = nil, trailing: NSLayoutXAxisAnchor? = nil, padding: UIEdgeInsets = .zero) {
-        translatesAutoresizingMaskIntoConstraints = false
-        if let top = top {
-            topAnchor.constraint(equalTo: top, constant: padding.top).isActive = true
-        }
-        if let bottom = bottom {
-            bottomAnchor.constraint(equalTo: bottom, constant: -padding.bottom).isActive = true
-        }
-        if let leading = leading {
-            leadingAnchor.constraint(equalTo: leading, constant: padding.left).isActive = true
-        }
-        if let trailing = trailing {
-            trailingAnchor.constraint(equalTo: trailing, constant: -padding.right).isActive = true
-        }
-    }
-    
-    func setAxisConstraints(xAnchor: NSLayoutXAxisAnchor? = nil, yAnchor: NSLayoutYAxisAnchor? = nil) {
-        translatesAutoresizingMaskIntoConstraints = false
-        if let xAnchor = xAnchor {
-            centerXAnchor.constraint(equalTo: xAnchor).isActive = true
-        }
-        if let yAnchor = yAnchor {
-            centerYAnchor.constraint(equalTo: yAnchor).isActive = true
-        }
-    }
-    
-    func setSquareAspectRatio(sideLength: CGFloat) {
-        translatesAutoresizingMaskIntoConstraints = false
-        widthAnchor.constraint(equalToConstant: sideLength).isActive = true
-        heightAnchor.constraint(equalTo: widthAnchor).isActive = true
+    @objc private func alsdjf() {
+//        let positions = enemies.map { $0.center }
+//        print(positions)
+//        print(projectiles.map { $0.superview!.bounds.contains($0.frame) })
+//        print(projectiles)
+//        print(enemies.map { $0.color })
     }
 }
